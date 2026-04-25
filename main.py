@@ -37,6 +37,9 @@ def monitor():
             (x, y, w, h) = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             print("MOTION DETECTED")
+                  # Add this inside the loop:
+            with open("motion_log.txt", "a") as f:
+                f.write(f"Motion detected at: {time.ctime()}\n")
 
         cv2.imshow("Security Feed", frame)
 
