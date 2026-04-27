@@ -41,6 +41,28 @@ def monitor():
             with open("motion_log.txt", "a") as f:
                 f.write(f"Motion detected at: {time.ctime()}\n")
 
+        # 5. Create a Status Overlay
+        status_text = "Status: IDLE"
+        status_color = (0, 255, 0) # Green
+            
+        if len(contours) > 0:
+            for contour in contours:
+                if cv2.contourArea(contour) > 500:
+                    status_text = "Status: MOTION DETECTED"
+                    status_color = (0, 0, 255) # Red
+        
+        # Draw a black bar at the top for text
+        cv2.rectangle(frame, (0, 0), (frame.shape[1], 40), (0, 0, 0), -1)
+        
+        # Add the text
+        cv2.putText(frame, status_text, (10, 30), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, status_color, 2)
+        
+        # Add a timestamp to the feed
+        timestamp_str = time.strftime("%H:%M:%S")
+        cv2.putText(frame, timestamp_str, (frame.shape[1] - 150, 30), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 1)
+
         cv2.imshow("Security Feed", frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
