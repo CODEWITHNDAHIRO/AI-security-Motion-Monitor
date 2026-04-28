@@ -2,7 +2,7 @@ import cv2
 import time
 
 def monitor():
-    cap = cv2.VideoCapture(0) # 0 is your Mac's built-in camera
+    cap = cv2.VideoCapture(0) # 0 is the Mac's built-in camera
     background_frame = None
 
     print("Security Monitor Active... Press 'q' to quit.")
@@ -16,17 +16,17 @@ def monitor():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
-        # 2. Set the background if it's the first frame
+        # 2. Setting the background if it's the first frame
         if background_frame is None:
             background_frame = gray
             continue
 
-        # 3. Compute the absolute difference
+        # 3. Computing the absolute difference
         frame_delta = cv2.absdiff(background_frame, gray)
         thresh = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)[1]
         thresh = cv2.dilate(thresh, None, iterations=2)
 
-        # 4. Find contours (the "motion")
+        # 4. Finding contours (the "motion")
         contours, _ = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         for contour in contours:
