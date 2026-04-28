@@ -1,9 +1,4 @@
-# AI Security Motion Monitor
-
-![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)
-![OpenCV](https://img.shields.io/badge/OpenCV-Computer--Vision-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-
+AI SECURITY MOTION MONITOR
 A real-time security surveillance system that utilizes **Frame Differencing** and **Gaussian Blur pre-processing** to identify movement. This project is designed as a modular AI vision lab to explore motion tracking and automated event logging.
 
 ## Key Features
